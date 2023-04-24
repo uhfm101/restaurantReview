@@ -1,0 +1,15 @@
+mixin restaurantForm(restaurant, buttonText, saveUrl, cancelUrl, deleteUrl)
+    form(action=saveUrl method='post')
+        div.input-container.wide
+            label(for='name').form-label Name
+            input(type='text' name='name' id = 'name' required=true value=restaurant.name)
+        div.input-container.super-wide
+            label(for='image').form-label Image Url
+            input(type='text' name='image' id = 'image' required=true value=restaurant.image)
+        div.input-container
+            label(for='description').form-label
+            textarea(name='description' id = 'description' rows=20 cols=100) #{restaurant.description}
+        a.button(href=cancelUrl) Cancel
+        if (deleteUrl)
+            a.button(href=deleteUrl) Delete
+        button.button.primary(type='submit') #{buttonText}

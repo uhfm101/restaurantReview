@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/restaurantForm
+    div.content
+        +restaurantForm(restaurant, 'Publish', '/restaurant/add', '/', null)
