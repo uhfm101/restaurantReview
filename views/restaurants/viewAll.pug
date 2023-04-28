@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    include ../mixins/restaurantCard
+    div.articles-header
+        div.article-header-title Restaurant Selection
+        div
+            a.button.primary(href = '/restaurant/add') Add Your Restaurant
+
+    ul.article-list
+        each restaurant in restaurants
+            li
+                +restuarantCard(restaurant)

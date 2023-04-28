@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+    div.container.blog
+        div.content
+            div.article-header-row
+                h1.article-title=restaurant.name
+                a.button(href=`/restaurant/${restaurant.id}/edit`) Edit
+            p.published-on Owned by
+                strong.emphasize #{restaurant.owner.first_name}
+
+            img.blog-image(src=restaurant.image)
+            p.article-body=restaurant.description
+
+            div.comment-section
+                h3.comment-section-title Reviews (#{restaurant.reviews.length})
+                div.comment-form
+                    form(action= `/restaurant/${restaurant.id}/review/create` method = 'post')
+                        div.input-container.wide
+                            label(for='reviewer_name').form-label Your name

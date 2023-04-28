@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'owner',
         foreignKey: 'owner_id'
       })
+      Restaurant.hasMany(models.Review, {
+        as: 'reviews',
+        foreignKey: 'restaurant_id'
+      })
     }
   }
   Restaurant.init({
@@ -25,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Restaurant',
-    tablesName: 'restaurant_restaurants',
+    tableName: 'restaurant_restaurants',
     timestamps: false
   });
   return Restaurant;

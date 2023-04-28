@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/restaurantForm
+    div.content
+        +restaurantForm(restaurant, 'Update', `/restaurant/${restaurant.id}/edit`,`/restaurant/${restaurant.id}`, `/restaurant/${restaurant.id}/delete`)
