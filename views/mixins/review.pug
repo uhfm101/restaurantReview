@@ -1,0 +1,23 @@
+mixin review(review)
+    include replyForm
+    div.comment
+        div.comment-header
+            div.comment-author=review.reviewer_name
+            div.comment-time=review.reviewedAgo
+        div.comment-body=review.body
+        div rating: #{review.rating} Stars
+        div
+            h4.reply-header Replies (#{review.replies.length})
+            div.reply-container
+                +replyForm(review)
+                if review.replies.length > 0
+                    ul.reply-list
+                        each reply in replies
+                            li
+                                div.comment
+                                    div.comment-header
+                                        div.comment-author=reply.reviewer_name
+                                        div.comment-time=reply.friendlyReplyDate
+                                    div.comment-body=reply.body
+                else
+                    p.empty-list No Replies

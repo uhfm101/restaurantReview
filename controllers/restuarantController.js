@@ -1,4 +1,4 @@
-const {Restaurant} = require('../models')
+const {Restaurant, Review, Reply} = require('../models')
 
 module.exports.renderAddForm = function(req, res){
     const restaurant = {
@@ -21,7 +21,22 @@ module.exports.addRestaurant = async function(req, res){
 
 module.exports.displayRestaurant = async function(req, res){
     const restaurant = await Restaurant.findByPk(req.params.restaurantId, {
-        include: ['owner']
+        include: [
+            'owner',
+            {
+                model: Review,
+                as: 'reviews',
+                required: false,
+                include: [{
+                    model: Reply,
+                    as: 'replies',
+                    required: false
+                }]
+            }
+            ],
+        order: [
+            ['reviews', 'commented_on', 'desc']
+        ]
     })
     res.render('restaurants/view', {restaurant})
 }

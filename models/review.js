@@ -1,4 +1,5 @@
 'use strict';
+const moment = require('moment')
 const {
   Model
 } = require('sequelize');
@@ -11,13 +12,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Review.hasMany(models.Reply,{
+        as: 'replies',
+        foreignKey: 'parent_review_id'
+      })
     }
   }
   Review.init({
     reviewer_name: DataTypes.STRING,
     body: DataTypes.STRING,
     commented_on: DataTypes.DATE,
-    rating: DataTypes.INTEGER
+    rating: DataTypes.INTEGER,
+    restaurant_id: DataTypes.INTEGER,
+    parent_review_id: DataTypes.INTEGER,
+    reviewedAgo: {
+      type: DataTypes.VIRTUAL,
+      get(){
+        let reviewedOn = moment(this.commented_on)
+        let now = moment()
+        return moment.duration(reviewedOn.diff(now)).humanize(true)
+      }
+    }
   }, {
     sequelize,
     modelName: 'Review',

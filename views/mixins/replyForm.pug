@@ -1,0 +1,14 @@
+mixin replyForm(review)
+    div.reply-form
+        form(action = `/review/${review.id}/reply/create` method='post')
+            div.input-form-row
+                div.input-container
+                    input(type='text', name='reviewer_name' id = 'reviewer_name' required=true placeholder="Your Name")
+                div.input-container.wide
+                    input(placeholder = "Your Reply Here" required=true name="body" id = "body")
+                div.input-container.wide
+                    label(for = 'rating') Rating
+                    select(id = 'rating' name = 'rating')
+                        each rating in [1,2,3,4,5]
+                            option(value = rating selected= (rating === restaurant.rating)) #{rating}
+                button.button.primary(type="submit") Reply
