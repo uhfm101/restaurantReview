@@ -37,7 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Review',
     timestamps: false,
-    tableName: 'restaurant_reviews'
+    tableName: 'restaurant_reviews',
+    defaultScope: {
+      where: {
+        parent_review_id: null
+      }
+    }
   });
   return Review;
 };

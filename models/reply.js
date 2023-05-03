@@ -1,7 +1,7 @@
 'use strict';
 const moment = require('moment')
 const {
-    Model
+    Model, Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Reply extends Model {
@@ -33,7 +33,14 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'Reply',
         timestamps: false,
-        tableName: 'restaurant_reviews'
+        tableName: 'restaurant_reviews',
+        defaultScope: {
+            where: {
+                parent_review_id: {
+                    [Op.ne]: null
+                }
+            }
+        }
     });
     return Reply;
 };

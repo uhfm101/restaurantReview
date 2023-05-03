@@ -12,7 +12,7 @@ mixin review(review)
                 +replyForm(review)
                 if review.replies.length > 0
                     ul.reply-list
-                        each reply in replies
+                        each reply in review.replies
                             li
                                 div.comment
                                     div.comment-header
