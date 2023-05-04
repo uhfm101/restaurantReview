@@ -5,7 +5,8 @@ block content
     div.articles-header
         div.article-header-title Restaurant Selection
         div
-            a.button.primary(href = '/restaurant/add') Add Your Restaurant
+            if user && user.is('owner')
+                a.button.primary(href = '/restaurant/add') Add Your Restaurant
 
     ul.article-list
         each restaurant in restaurants

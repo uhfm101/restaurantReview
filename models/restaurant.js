@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'restaurant_id'
       })
     }
+    isOwnedBy(user){
+      return this.owner_id === user.id
+    }
   }
   Restaurant.init({
     name: DataTypes.STRING,

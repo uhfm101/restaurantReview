@@ -14,7 +14,7 @@ module.exports.addRestaurant = async function(req, res){
         name: req.body.name,
         image: req.body.image,
         description: req.body.description,
-        owner_id: 1,
+        owner_id: req.body.id,
     })
     res.redirect('/')
 }
