@@ -10,6 +10,6 @@ mixin restaurantForm(restaurant, buttonText, saveUrl, cancelUrl, deleteUrl)
             label(for='description').form-label
             textarea(name='description' id = 'description' rows=20 cols=100) #{restaurant.description}
         a.button(href=cancelUrl) Cancel
-        if (deleteUrl)
+        if (deleteUrl && user && restaurant.isOwnedBy(user))
             a.button(href=deleteUrl) Delete
         button.button.primary(type='submit') #{buttonText}

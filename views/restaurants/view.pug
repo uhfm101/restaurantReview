@@ -6,10 +6,13 @@ block content
         div.content
             div.article-header-row
                 h1.article-title=restaurant.name
-                a.button(href=`/restaurant/${restaurant.id}/edit`) Edit
+                if user && restaurant.isOwnedBy(user)
+                    a.button(href=`/restaurant/${restaurant.id}/edit`) Edit
+                if user && user.is('admin')
+                    a.button(href=`/restaurant/${restaurant.id}/delete`) Delete
             p.published-on Owned by
-                strong.emphasize #{restaurant.owner.first_name}
-
+                strong.emphasize #{restaurant.name}
+                // Fix to display owner name
             img.blog-image(src=restaurant.image)
             p.article-body=restaurant.description
 

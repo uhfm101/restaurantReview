@@ -3,21 +3,22 @@ var router = express.Router();
 const restaurantController = require('../controllers/restuarantController')
 const reviewController = require('../controllers/reviewController')
 const userController = require('../controllers/userController')
+const userAuthenticated = require('../middleware/userAuthenticated')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/restaurant');
 });
 
-router.get('/restaurant/add', restaurantController.renderAddForm)
-router.post('/restaurant/add', restaurantController.addRestaurant)
+router.get('/restaurant/add', userAuthenticated, restaurantController.renderAddForm)
+router.post('/restaurant/add', userAuthenticated, restaurantController.addRestaurant)
 
 router.get('/restaurant/:restaurantId', restaurantController.displayRestaurant)
 router.get('/restaurant/', restaurantController.displayAll)
 
-router.get('/restaurant/:restaurantId/edit', restaurantController.renderEditForm)
-router.post('/restaurant/:restaurantId/edit', restaurantController.updateRestaurant)
+router.get('/restaurant/:restaurantId/edit', userAuthenticated, restaurantController.renderEditForm)
+router.post('/restaurant/:restaurantId/edit', userAuthenticated, restaurantController.updateRestaurant)
 
-router.get('/restaurant/:restaurantId/delete', restaurantController.deleteRestaurant)
+router.get('/restaurant/:restaurantId/delete', userAuthenticated, restaurantController.deleteRestaurant)
 
 router.post('/restaurant/:restaurantId/review/create', reviewController.addReview)
 

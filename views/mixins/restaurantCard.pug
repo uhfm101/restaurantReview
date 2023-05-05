@@ -1,7 +1,8 @@
-mixin restuarantCard(restaurant)
+mixin restaurantCard(restaurant)
     a.card(href=`/restaurant/${restaurant.id}`)
         image.card-image(src=restaurant.image)
         div.card-body
             div.card-title=restaurant.name
             p.published-on Owned by
-                strong.emphasize #{restaurant.owner.first_name}
+                strong.emphasize #{restaurant.name}
+                // Fix to display owner name
