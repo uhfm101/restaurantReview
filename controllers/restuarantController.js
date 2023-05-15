@@ -50,10 +50,19 @@ module.exports.displayAll = async function(req, res){
 
 module.exports.renderEditForm = async function(req, res){
     const restaurant = await Restaurant.findByPk(req.params.restaurantId)
+    if (!restaurant.isOwnedBy(req.user)){
+        res.redirect('/')
+        return
+    }
     res.render('restaurants/edit', {restaurant})
 }
 
 module.exports.updateRestaurant = async function(req, res){
+    const restaurant = await Restaurant.findByPk(req.params.restaurantId)
+    if (!restaurant.isOwnedBy(req.user)){
+        res.redirect('/')
+        return
+    }
     await Restaurant.update({
         name: req.body.name,
         image: req.body.image,
@@ -67,6 +76,11 @@ module.exports.updateRestaurant = async function(req, res){
 }
 
 module.exports.deleteRestaurant = async function(req, res){
+    const restaurant = await Restaurant.findByPk(req.params.restaurantId)
+    if (!req.user.is('admin') && !restaurant.isOwnedBy(user)){
+        res.redirect('/')
+        return
+    }
     await Restaurant.destroy({
         where: {
             id: req.params.restaurantId

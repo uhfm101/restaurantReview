@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.INTEGER,
     restaurant_id: DataTypes.INTEGER,
     parent_review_id: DataTypes.INTEGER,
+    is_deleted: DataTypes.BOOLEAN,
     reviewedAgo: {
       type: DataTypes.VIRTUAL,
       get(){

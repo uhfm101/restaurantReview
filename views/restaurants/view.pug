@@ -11,8 +11,7 @@ block content
                 if user && user.is('admin')
                     a.button(href=`/restaurant/${restaurant.id}/delete`) Delete
             p.published-on Owned by
-                strong.emphasize #{restaurant.name}
-                // Fix to display owner name
+                strong.emphasize #{restaurant.owner.first_name}
             img.blog-image(src=restaurant.image)
             p.article-body=restaurant.description
 

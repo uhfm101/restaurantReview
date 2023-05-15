@@ -4,8 +4,13 @@ mixin review(review)
         div.comment-header
             div.comment-author=review.reviewer_name
             div.comment-time=review.reviewedAgo
-        div.comment-body=review.body
-        div rating: #{review.rating} Stars
+        if review.is_deleted
+            p [Deleted]
+        else
+            div.comment-body=review.body
+            div rating: #{review.rating} Stars
+            if user && user.is('admin')
+                a(href = `/review/${review.id}/delete`) Delete
         div
             h4.reply-header Replies (#{review.replies.length})
             div.reply-container
@@ -18,6 +23,11 @@ mixin review(review)
                                     div.comment-header
                                         div.comment-author=reply.reviewer_name
                                         div.comment-time=reply.friendlyReplyDate
-                                    div.comment-body=reply.body
+                                    if reply.is_deleted
+                                        p [deleted]
+                                    else
+                                        div.comment-body=reply.body
+                                        if user && user.is('admin')
+                                            a(href = `/review/${review.id}/reply/${reply.id}/delete`) Delete
                 else
                     p.empty-list No Replies
