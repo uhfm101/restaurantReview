@@ -1,0 +1,5 @@
+mixin addPictureForm(restaurant, buttonText, saveUrl, cancelUrl, deleteUrl)
+    form(action=saveUrl method='post')
+        div.input-container.wide
+            label(for='user_image').form-label Your Image
+            input(type='text' name='user_image' id = 'user_image' required=true value=restaurant.user_image)

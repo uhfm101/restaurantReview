@@ -14,6 +14,7 @@ block content
                 strong.emphasize #{restaurant.owner.first_name}
             img.blog-image(src=restaurant.image)
             p.article-body=restaurant.description
+            button.button.primary(type = 'submit') Add Picture
 
             div.comment-section
                 h3.comment-section-title Reviews (#{restaurant.reviews.length})
