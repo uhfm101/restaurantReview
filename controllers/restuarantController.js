@@ -88,3 +88,10 @@ module.exports.deleteRestaurant = async function(req, res){
     })
     res.redirect('/')
 }
+
+module.exports.renderUserImageForm = async function(req, res){
+    const userImage = {
+        user_image: '',
+    }
+    res.render('restaurants/addUserImage', {userImage})
+}

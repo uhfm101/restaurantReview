@@ -36,4 +36,6 @@ router.get('/logout', userController.logout)
 router.get('/review/:reviewId/delete', userAuthenticated, userHasRole('admin'), reviewController.deleteReview)
 router.get('/review/:reviewId/reply/:replyId/delete'), userAuthenticated, userHasRole('admin'), reviewController.deleteReply
 
+router.get('/restaurant/:restaurantId/addUserImage', restaurantController.renderUserImageForm)
+
 module.exports = router;

@@ -8,7 +8,9 @@ mixin review(review)
             p [Deleted]
         else
             div.comment-body=review.body
-            div rating: #{review.rating} Stars
+            div rating:
+                -for(let i = 0; i<review.rating; i++)
+                    span &#X2b50
             if user && user.is('admin')
                 a(href = `/review/${review.id}/delete`) Delete
         div

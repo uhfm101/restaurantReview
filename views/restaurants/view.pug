@@ -2,6 +2,7 @@ extends ../layout
 
 block content
     include ../mixins/review
+    include ../mixins/userImageForm
     div.container.blog
         div.content
             div.article-header-row
@@ -13,19 +14,25 @@ block content
             p.published-on Owned by
                 strong.emphasize #{restaurant.owner.first_name}
             img.blog-image(src=restaurant.image)
+            h2 Description
             p.article-body=restaurant.description
-            button.button.primary(type = 'submit') Add Picture
+            form(action=`/restaurant/${restaurant.id}/addUserImage`)
+                div.input-container.super-wide
+                    label(for='user_image').form-label Image Url
+                    input(type='text' name='user_image' id = 'user_image' value=restaurant.user_image)
+                div
+                    button.button.primary(type = 'submit') Add Image
 
             div.comment-section
                 h3.comment-section-title Reviews (#{restaurant.reviews.length})
                 div.comment-form
                     form(action= `/restaurant/${restaurant.id}/review/create` method = 'post')
-                        div.input-container.wide
+                        div.input-container
                             label(for='reviewer_name').form-label Your name
                             input(type = 'text' id = 'reviewer_name', name= 'reviewer_name' required =true)
-                        div.input-container.wide
+                        div.input-container
                             textarea(placeholder = 'This restaurant was...' required=true name='body' id='id' cols = 80 rows = 10)
-                        div.input-container.wide
+                        div.input-container
                             label(for = 'rating') Rating
                             select(id = 'rating' name = 'rating')
                                 each rating in [1,2,3,4,5]
