@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'reviews',
         foreignKey: 'restaurant_id'
       })
+      Restaurant.hasMany(models.userImage, {
+        as: 'userImages',
+        foreignKey: 'restaurant_id'
+      })
     }
     isOwnedBy(user){
       return this.owner_id === user.id
@@ -34,7 +38,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Restaurant',
     tableName: 'restaurant_restaurants',
-    timestamps: false
+    timestamps: false,
+    defaultScope: {
+      where: {
+        user_image: null
+      }
+    }
   });
   return Restaurant;
 };

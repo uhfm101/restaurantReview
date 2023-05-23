@@ -1,9 +1,0 @@
-mixin userImageForm(restaurant, buttonText, saveUrl, cancelUrl, deleteUrl)
-    form(action=saveUrl method='post')
-        div.input-container.super-wide
-            label(for='user_image').form-label Image Url
-            input(type='text' name='user_image' id = 'user_image' value=restaurant.user_image)
-
-        if (deleteUrl && user && restaurant.isOwnedBy(user))
-            a.button(href=deleteUrl) Delete
-        button.button.primary(type='submit') #{buttonText}

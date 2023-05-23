@@ -5,6 +5,7 @@ const reviewController = require('../controllers/reviewController')
 const userController = require('../controllers/userController')
 const userAuthenticated = require('../middleware/userAuthenticated')
 const userHasRole = require('../middleware/userHasRole')
+const userImageController = require('../controllers/userImageController')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/restaurant');
@@ -36,6 +37,6 @@ router.get('/logout', userController.logout)
 router.get('/review/:reviewId/delete', userAuthenticated, userHasRole('admin'), reviewController.deleteReview)
 router.get('/review/:reviewId/reply/:replyId/delete'), userAuthenticated, userHasRole('admin'), reviewController.deleteReply
 
-router.get('/restaurant/:restaurantId/addUserImage', restaurantController.renderUserImageForm)
+router.post('/restaurant/:restaurantId/userImage/create', userImageController.createUserImage)
 
 module.exports = router;

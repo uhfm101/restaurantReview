@@ -1,4 +1,4 @@
-const {Restaurant, Review, Reply} = require('../models')
+const {Restaurant, Review, Reply, userImage} = require('../models')
 
 module.exports.renderAddForm = function(req, res){
     const restaurant = {
@@ -32,8 +32,12 @@ module.exports.displayRestaurant = async function(req, res){
                     as: 'replies',
                     required: false
                 }]
-            }
-            ],
+            },
+            {
+                model: userImage,
+                as: 'userImages',
+                required: 'false',
+            }],
         order: [
             ['reviews', 'commented_on', 'desc']
         ]
@@ -87,11 +91,4 @@ module.exports.deleteRestaurant = async function(req, res){
         }
     })
     res.redirect('/')
-}
-
-module.exports.renderUserImageForm = async function(req, res){
-    const userImage = {
-        user_image: '',
-    }
-    res.render('restaurants/addUserImage', {userImage})
 }

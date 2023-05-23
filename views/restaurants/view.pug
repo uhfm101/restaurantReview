@@ -2,7 +2,7 @@ extends ../layout
 
 block content
     include ../mixins/review
-    include ../mixins/userImageForm
+    include ../mixins/userImage
     div.container.blog
         div.content
             div.article-header-row
@@ -16,11 +16,10 @@ block content
             img.blog-image(src=restaurant.image)
             h2 Description
             p.article-body=restaurant.description
-            form(action=`/restaurant/${restaurant.id}/addUserImage`)
+            form(action=`/restaurant/${restaurant.id}/addUserImage` method = 'post')
                 div.input-container.super-wide
                     label(for='user_image').form-label Image Url
-                    input(type='text' name='user_image' id = 'user_image' value=restaurant.user_image)
-                div
+                    input(type='text' name='user_image' id = 'user_image' required= true value=restaurant.user_image)
                     button.button.primary(type = 'submit') Add Image
 
             div.comment-section
