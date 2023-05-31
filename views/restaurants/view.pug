@@ -16,11 +16,26 @@ block content
             img.blog-image(src=restaurant.image)
             h2 Description
             p.article-body=restaurant.description
-            form(action=`/restaurant/${restaurant.id}/addUserImage` method = 'post')
-                div.input-container.super-wide
-                    label(for='user_image').form-label Image Url
-                    input(type='text' name='user_image' id = 'user_image' required= true value=restaurant.user_image)
-                    button.button.primary(type = 'submit') Add Image
+
+            div.comment-section
+                h3.comment-section-title Visitor Images (#{restaurant.userImages.length})
+                form(action=`/restaurant/${restaurant.id}/userImage/create` method = 'post')
+                    div.input-container
+                        label(for='user_name').form-label Your name
+                        input(type='text' name='user_name' id = 'user_name' required= true)
+
+                    div.input-container.super-wide
+                        label(for='user_image').form-label Image Url
+                        input(type='text' name='user_image' id = 'user_image' required= true)
+
+                        div
+                            button.button.primary(type = 'submit') Add Image
+
+
+                ul.comment-list
+                    each userImage in restaurant.userImages
+                        li
+                            +userImage(userImage)
 
             div.comment-section
                 h3.comment-section-title Reviews (#{restaurant.reviews.length})

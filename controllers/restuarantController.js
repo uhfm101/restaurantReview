@@ -32,12 +32,7 @@ module.exports.displayRestaurant = async function(req, res){
                     as: 'replies',
                     required: false
                 }]
-            },
-            {
-                model: userImage,
-                as: 'userImages',
-                required: 'false',
-            }],
+            }, 'userImages'],
         order: [
             ['reviews', 'commented_on', 'desc']
         ]

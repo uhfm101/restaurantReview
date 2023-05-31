@@ -38,5 +38,6 @@ router.get('/review/:reviewId/delete', userAuthenticated, userHasRole('admin'), 
 router.get('/review/:reviewId/reply/:replyId/delete'), userAuthenticated, userHasRole('admin'), reviewController.deleteReply
 
 router.post('/restaurant/:restaurantId/userImage/create', userImageController.createUserImage)
+router.get('/userImage/:userImageId/delete', userAuthenticated, userHasRole('admin'), userImageController.deleteUserImage)
 
 module.exports = router;

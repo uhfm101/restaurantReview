@@ -1,5 +1,7 @@
 mixin userImage(userImage)
     div
-        h2 #{userImage.user_name}
+        h3 by #{userImage.user_name}
         div
-            #{userImage.user_image}
+            img.uImage(src = userImage.user_image)
+        if user && user.is('admin')
+            a(href = `/userImage/${userImage.id}/delete`) Delete

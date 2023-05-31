@@ -39,11 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Restaurant',
     tableName: 'restaurant_restaurants',
     timestamps: false,
-    defaultScope: {
-      where: {
-        user_image: null
-      }
-    }
   });
   return Restaurant;
 };
